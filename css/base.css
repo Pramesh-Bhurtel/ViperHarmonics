@@ -1,0 +1,89 @@
+/* 
+  ViperHarmonics: Expert Base & Reset
+  Modern Fluid Design System
+*/
+
+:root {
+    /* Color Palette */
+    --bg: #0d0e15;
+    --panel-bg: rgba(255, 255, 255, 0.04);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --accent: #f59e0b;
+    --accent-hover: #d97706;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    
+    /* Typography */
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    
+    /* Fluid Spacing & Accessibility */
+    --touch-target: 3rem; /* 48px - comfortably exceeds 44px min */
+    --border-radius: 0.75rem;
+    --gap-base: 1rem;
+}
+
+/* Modern CSS Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    font-size: 16px; /* Base for rem units */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-ui);
+    color: var(--text);
+    background: var(--bg);
+    background-image: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08), transparent 60%);
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fluid Media & Inputs */
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+textarea, input {
+    user-select: text;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+/* Typography Base */
+h1, h2, h3 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+    background: linear-gradient(135deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,159 @@
+/* 
+  ViperHarmonics: Expert Layout Engine
+  Mobile-First Architecture
+*/
+
+#main-app {
+    display: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--gap-base);
+    gap: var(--gap-base);
+}
+
+#main-app.visible {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+}
+
+.header-controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Core Content Area */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--gap-base);
+    min-height: 0;
+}
+
+/* Sidebar / Controls Panel */
+.controls-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+/* Main Workspace */
+.main-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-base);
+    min-height: 0;
+}
+
+/* Dashboard: Visualizer & Notation */
+.dashboard-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-base);
+    flex-shrink: 0;
+}
+
+.visualizer-container,
+.notation-container,
+.keyboard-section {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+.visualizer-container {
+    min-height: 8rem;
+    flex: 1;
+    overflow: hidden;
+}
+
+.notation-container {
+    min-height: 12rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.keyboard-section {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 14rem;
+}
+
+#keyboard-container {
+    width: 100%;
+    max-width: 64rem; /* 1024px equivalent */
+}
+
+/* --- Breakpoint: Tablet (640px+) --- */
+@media (min-width: 40rem) {
+    .controls-panel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .dashboard-row {
+        flex-direction: row;
+        min-height: 12rem;
+    }
+}
+
+/* --- Breakpoint: Desktop (1024px+) --- */
+@media (min-width: 64rem) {
+    #main-app {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .content-area {
+        flex-direction: row;
+    }
+
+    .controls-panel {
+        display: flex;
+        flex-direction: column;
+        width: 20rem; /* 320px */
+        padding: 1.5rem;
+    }
+
+    .main-stage {
+        gap: 1.5rem;
+    }
+
+    .dashboard-row {
+        gap: 1.5rem;
+    }
+    
+    .keyboard-section {
+        padding: 2.5rem;
+    }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ViperHarmonics | Premium Web Harmonium</title>
+    <meta name="description" content="Master the harmonium from your browser. Experience high-fidelity audio, MIDI support, and instant performance sharing on ViperHarmonics. Built for artists and enthusiasts.">
+    
+    <meta property="og:title" content="ViperHarmonics | Professional Web Harmonium" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Experience the authentic sound of a high-fidelity harmonium. Play instantly using your computer keyboard or MIDI controller. Professional-grade audio for artists and enthusiasts." />
+    <meta property="og:image" content="https://pramesh-bhurtel.github.io/ViperHarmonics/assets/images/icons/viperharmonics_512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:url" content="https://pramesh-bhurtel.github.io/ViperHarmonics/" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Link to our clean modular styles -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/components.css">
+    
+    <!-- PWA references if they exist -->
+    <link rel="manifest" href="manifest.json" onerror="this.remove()">
+    <link rel="shortcut icon" href="assets/images/icons/viperharmonics_016.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_072.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_096.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_128.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_144.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_152.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_192.png" onerror="this.remove()" />
+    <link rel="apple-touch-icon" href="assets/images/icons/viperharmonics_512.png" onerror="this.remove()" />
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <h1 class="splash-title">ViperHarmonics</h1>
+        <p class="splash-subtitle">Premium Web Harmonium</p>
+        <button id="btn-start" class="btn-primary btn-pulse">Load & Start Engine</button>
+    </div>
+
+    <!-- Main Application UI -->
+    <div id="main-app">
+        <!-- Header -->
+        <header>
+            <h1>ViperHarmonics</h1>
+            <div class="header-controls">
+                <button id="btn-info" class="icon-btn" title="About"><i class="fa fa-info-circle"></i></button>
+                <button id="btn-help" class="icon-btn" title="Keyboard Shortcuts"><i class="fa fa-keyboard"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <div class="content-area">
+            
+            <!-- Sidebar Controls -->
+            <aside class="controls-panel">
+                <div class="control-group">
+                    <div class="control-header">
+                        <span>Volume</span>
+                        <span id="volume-label" class="value-display">30%</span>
+                    </div>
+                    <input type="range" id="volume-slider" min="1" max="100" value="30">
+                </div>
+
+
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span>Reverb / Ambience</span>
+                        <label class="switch">
+                            <input id="reverb-switch" type="checkbox">
+                            <span class="slider-toggle"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span>Transpose <span id="root-note-label">- C</span></span>
+                    </div>
+                    <div class="stepper">
+                        <button id="btn-trans-down">-</button>
+                        <div id="transpose-val" class="step-val">0</div>
+                        <button id="btn-trans-up">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span>Octave Shift</span>
+                    </div>
+                    <div class="stepper">
+                        <button id="btn-oct-down">-</button>
+                        <div id="octave-val" class="step-val">3</div>
+                        <button id="btn-oct-up">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-header">
+                        <span>Reed Stack</span>
+                    </div>
+                    <div class="stepper">
+                        <button id="btn-stack-down">-</button>
+                        <div id="stack-val" class="step-val">0</div>
+                        <button id="btn-stack-up">+</button>
+                    </div>
+                </div>
+
+                <div class="control-group midi-group">
+                    <div class="control-header">
+                        <span id="midiInputDevicesInfo">MIDI: Checking...</span>
+                    </div>
+                    <select id="midiInputDevices" aria-label="MIDI Input Device"></select>
+                </div>
+            </aside>
+
+            <!-- Center Stage -->
+            <main class="main-stage">
+                
+                <div class="dashboard-row">
+                    <!-- Audio Visualizer -->
+                    <div class="visualizer-container">
+                        <canvas id="visualizer-canvas"></canvas>
+                    </div>
+                    
+                    <!-- Swaram Notation -->
+                    <div class="notation-container">
+                        <div class="notation-header">
+                            <div class="notation-title-group">
+                                <span>Live Notation</span>
+                                <div id="shared-badge" class="shared-badge" style="display: none;">
+                                    <i class="fa fa-share-alt"></i> Shared by <span id="shared-author"></span>
+                                </div>
+                            </div>
+                            <div class="notation-actions">
+                                <button id="btn-edit-notation" title="Toggle edit mode"><i class="fa fa-pencil"></i> Edit</button>
+                                <button id="btn-recordings" title="My Recordings"><i class="fa fa-list"></i> Saved</button>
+                                <button id="btn-save-notation" title="Save recording"><i class="fa fa-save"></i> Save</button>
+                                <button id="btn-share-notation" title="Share performance"><i class="fa fa-share-nodes"></i> Share</button>
+                                <button id="btn-play-notation" title="Replay recorded notes"><i class="fa fa-play"></i> Replay</button>
+                                <button id="btn-clear-notation" title="Clear"><i class="fa fa-trash"></i></button>
+                                <button id="btn-copy-notation" title="Copy"><i class="fa fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <textarea id="notation-display" class="notation-display" spellcheck="false" placeholder="Play notes to record..." readonly></textarea>
+                    </div>
+                </div>
+
+                <!-- Keyboard Rendering -->
+                <div class="keyboard-section">
+                    <div id="keyboard-container"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="shortcut-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="overlay-close" id="btn-close-help">&times;</button>
+            <h2><i class="fa fa-keyboard"></i> Native Key Mapping</h2>
+            <br>
+            <div class="key-list-modern">
+                <div class="key-category">
+                    <h4><i class="fa fa-circle"></i> White Keys (Swara)</h4>
+                    <p><kbd>` Q W E R T Y U I O P [ ] \</kbd></p>
+                </div>
+                <div class="key-category">
+                    <h4><i class="fa fa-circle" style="color:#000"></i> Black Keys (Komal/Tivra)</h4>
+                    <p><kbd>1 2 4 5 7 8 9 - =</kbd></p>
+                </div>
+                <div class="key-category">
+                    <h4><i class="fa fa-wand-magic-sparkles"></i> Notation Controls</h4>
+                    <p><kbd>Backspace</kbd> Delete last • <kbd>Delete</kbd> Clear all • <kbd>Tab</kbd> Insert Pause (,)</p>
+                </div>
+            </div>
+            
+            <div class="feature-notes">
+                <h4><i class="fa fa-microchip"></i> MIDI Integration</h4>
+                <p>Plug-and-play support for any MIDI controller. Maps 1:1 with standard key frequencies. Enjoy authentic harmonium response with full MIDI velocity support.</p>
+                
+                <h4><i class="fa fa-share-nodes"></i> Performance Sharing</h4>
+                <p>Every performance is serialized into a compact URL. Share your favorite rags or melodies instantly via the built-in QR generator or direct social links. Recipients can play back your jam instantly with zero setup.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="info-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="overlay-close" id="btn-close-info">&times;</button>
+            <h2><i class="fa fa-vial-pulse"></i> ViperHarmonics Engine</h2>
+            <div class="info-body">
+                <p>ViperHarmonics is a high-fidelity, pure software recreation of a classical Indian Harmonium. Leveraging the <strong>Web Audio API</strong>, it uses authentic reed samples coupled with real-time digital signal processing.</p>
+                
+                <h4><i class="fa fa-wave-square"></i> Audio Synthesis</h4>
+                <p>Our engine combines high-resolution PCM sampling with subtractive synthesis to deliver an organic "living" sound. Includes mechanical key-click logic and velocity-mapped resonance.</p>
+                
+                <h4><i class="fa fa-cloud-moon"></i> Spatial Processing</h4>
+                <p>The Ambience engine uses convolution reverb with captured impulse responses to place your performance in an authentic acoustic space, from dry studios to vast halls.</p>
+            </div>
+            <p class="info-footer">
+                <strong>Developed by <a href="https://www.prameshbhurtel.com.np/" target="_blank">Pramesh Bhurtel</a></strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Recordings Library Overlay -->
+    <div id="recordings-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="overlay-close" id="btn-close-recordings">&times;</button>
+            <h2>My Recordings</h2>
+            <p>Select a saved recording to load it into the notation pad.</p>
+            <div id="recordings-list" class="songs-list">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Overlay -->
+    <div id="share-overlay" class="overlay">
+        <div class="overlay-content share-modal">
+            <button class="overlay-close" id="btn-close-share">&times;</button>
+            <div class="share-track-info">
+                <div class="input-field-group">
+                    <label for="share-input-title">Track Title</label>
+                    <input type="text" id="share-input-title" placeholder="My Masterpiece">
+                </div>
+                <div class="input-field-group">
+                    <label for="share-input-author">Artist Name</label>
+                    <input type="text" id="share-input-author" placeholder="Anonymous">
+                </div>
+            </div>
+            
+            <div class="share-url-container">
+                <input type="text" id="share-url-input" readonly>
+                <button id="btn-copy-share-url" class="btn-primary">Copy</button>
+            </div>
+
+            <div id="share-qr-container" class="share-qr">
+                <!-- QR Code will be injected here -->
+            </div>
+
+            <div class="social-grid">
+                <button id="share-native" class="social-btn native" title="Share via Device"><i class="fa fa-share-nodes"></i></button>
+                <button id="share-whatsapp" class="social-btn whatsapp" title="Share to WhatsApp"><i class="fab fa-whatsapp"></i></button>
+                <button id="share-instagram" class="social-btn instagram" title="Share to Instagram"><i class="fab fa-instagram"></i></button>
+                <button id="share-facebook" class="social-btn facebook" title="Share to Facebook"><i class="fab fa-facebook-f"></i></button>
+                <button id="share-email" class="social-btn email" title="Share by Email"><i class="fa fa-envelope"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arrival Overlay -->
+    <div id="arrival-overlay" class="overlay">
+        <div class="overlay-content arrival-modal">
+            <div class="arrival-icon"><i class="fa fa-music"></i></div>
+            <h2 id="arrival-title">Shared Jam Arrival</h2>
+            <p id="arrival-message"></p>
+            <div class="arrival-actions">
+                <button id="btn-arrival-play" class="btn-primary">Play Now</button>
+                <p class="arrival-note">Shared recordings are read-only. Save a copy to edit.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script type="module" src="./js/app.js"></script>
+
+    <!-- Legacy Service Worker Registrator -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                try {
+                    navigator.serviceWorker.register("./serviceworker.js", { scope: "./" })
+                    .then(res => console.log("SW registered (legacy support)."))
+                    .catch(err => console.log("SW not found mapping."));
+                } catch(e) {}
+            });
+        }
+    </script>
+</body>
+</html>
