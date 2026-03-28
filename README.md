@@ -53,4 +53,4 @@ ViperHarmonics uses a modern, build-less ES6 architecture:
 -   **`input-handler.js`**: Unified event gateway for transparent cross-platform (Touch/Pointer/MIDI) input.
 
 ---
-*Developed by [Pramesh Bhurtel](https://www.prameshbhurtel.com.np/). Enhanced in 2026 for high-fidelity audio and social collaboration.*
+*Developed with 💖 by [Pramesh Bhurtel](https://www.prameshbhurtel.com.np/). Enhanced in 2026 for high-fidelity audio and social collaboration.*
