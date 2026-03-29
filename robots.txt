@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pramesh-bhurtel.github.io/ViperHarmonics/sitemap.xml
